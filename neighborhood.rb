@@ -32,7 +32,7 @@ class NeighborHood
   end
 
   def find_neighbor_cell(original, offset)
-    neighbor_location = Location.add(original.location, offset)
+    neighbor_location = original.location + offset
     @grid.detect{|cell| cell.at?(neighbor_location)}
   end
 

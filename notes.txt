@@ -1,3 +1,70 @@
+class Location
+  attr_reader :x, :y
+  
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+  
+  NORTHWEST = Location.new(-1, 1)
+    
+  def ==(other)
+    @x == other.x && @y == other.y
+  end
+end
+
+
+it 'NorthWest is located at (-1, 1)' do
+  location = Location.new(-1, 1)
+  assert_equal location, Location::NORTHWEST
+end
+
+
+
+it 'adding two locations returns a new location' do
+  result = Location::SOUTH + Location::CENTER
+
+  assert_equal Location::SOUTH, result
+end
+
+
+def +(other)
+  Location.new(@x+other.x, @y+other.y)
+end
+
+
+class Location
+  attr_reader :x, :y
+  
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+  
+  NORTHWEST = Location.new(-1, 1)
+  NORTHEAST = Location.new(1, 1)
+  SOUTHWEST = Location.new(-1, -1)
+  SOUTHEAST = Location.new(1, -1)
+  CENTER    = Location.new(0, 0)
+  NORTH     = Location.new(0, 1)
+  SOUTH     = Location.new(0, -1)
+  EAST      = Location.new(1, 0)
+  WEST      = Location.new(-1, 0)
+  
+  OFFSETS = [NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST, NORTH, SOUTH, EAST, WEST]
+      
+  def ==(other)
+    @x == other.x && @y == other.y
+  end
+  
+  def +(other)
+    Location.new(@x+other.x, @y+other.y)
+  end
+end
+
+
+No change to offsets test.
+
 require 'minitest/autorun'
 require_relative 'location'
 
@@ -52,3 +119,14 @@ describe Location do
     assert_equal expected, offsets
   end
 end
+
+The tests for cell, ruby test_cell.rb  passes with no changes.
+
+ruby test_gol.rb . All tests fails. Not because tests are dependent on implementation but the add class method was removed, so the old implementation breaks. It needs to be updated. In neighborhood.rb:
+
+def find_neighbor_cell(original, offset)
+  neighbor_location = original.location + offset
+  @grid.detect{|cell| cell.at?(neighbor_location)}
+end
+
+All the tests will pass now.
