@@ -6,15 +6,15 @@ class Location
     @y = y
   end
   
-  NORTHWEST = Location.new(-1, 1)
-  NORTHEAST = Location.new(1, 1)
-  SOUTHWEST = Location.new(-1, -1)
-  SOUTHEAST = Location.new(1, -1)
-  CENTER    = Location.new(0, 0)
-  NORTH     = Location.new(0, 1)
-  SOUTH     = Location.new(0, -1)
-  EAST      = Location.new(1, 0)
-  WEST      = Location.new(-1, 0)
+  NORTHWEST = new(-1, 1)
+  NORTHEAST = new(1, 1)
+  SOUTHWEST = new(-1, -1)
+  SOUTHEAST = new(1, -1)
+  CENTER    = new(0, 0)
+  NORTH     = new(0, 1)
+  SOUTH     = new(0, -1)
+  EAST      = new(1, 0)
+  WEST      = new(-1, 0)
   
   OFFSETS = [NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST, NORTH, SOUTH, EAST, WEST]
       
